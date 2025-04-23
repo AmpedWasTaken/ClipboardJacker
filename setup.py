@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="clipboardjacker",
-    version="0.1.3",
+    version="0.1.4",
     author="AmpedWastaken",
     author_email="ampedwastaken@gmail.com",
     description="A powerful Python tool for clipboard text replacement and monitoring",

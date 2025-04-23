@@ -6,6 +6,7 @@ A powerful Python tool that automatically replaces text in your clipboard based 
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PyPI Version](https://img.shields.io/pypi/v/clipboardjacker)](https://pypi.org/project/clipboardjacker/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/clipboardjacker)](https://pypi.org/project/clipboardjacker/)
+[![GitHub Stars](https://img.shields.io/github/stars/AmpedWastaken/ClipboardJacker)](https://github.com/AmpedWastaken/ClipboardJacker/stargazers)
 
 ## 🚀 Features
 
@@ -167,7 +168,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/ClipboardJacker&type=Date)](https://star-history.com/#yourusername/ClipboardJacker&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=AmpedWastaken/ClipboardJacker&type=Date)](https://star-history.com/#AmpedWastaken/ClipboardJacker&Date)
 
 ## 🙏 Acknowledgments
 
@@ -184,4 +185,4 @@ If you find this project helpful, please consider:
 
 ---
 
-Made with ❤️ by [Your Name](https://github.com/yourusername)
+Made with ❤️ by [AmpedWastaken](https://github.com/AmpedWastaken)
