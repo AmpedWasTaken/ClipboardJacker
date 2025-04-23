@@ -1,4 +1,4 @@
-# ClipReplacer
+# ClipboardJacker
 
 A configurable clipboard monitoring tool that automatically replaces text matching specified regex patterns with configured replacements.
 
@@ -19,9 +19,9 @@ A configurable clipboard monitoring tool that automatically replaces text matchi
 ## Installation
 
 1. Clone this repository
-2. Install dependencies:
+2. Install the package:
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Usage
@@ -40,12 +40,12 @@ pip install -r requirements.txt
 
 2. Run the program:
 ```bash
-python clipreplacer.py
+clipboardjacker
 ```
 
 Or specify a custom config file:
 ```bash
-python clipreplacer.py --config custom_config.json
+clipboardjacker --config custom_config.json
 ```
 
 ## Example Use Cases
