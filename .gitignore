@@ -1,11 +1,11 @@
 # Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
+clipboardjacker/__pycache__/
+clipboardjacker/*.py[cod]
+clipboardjacker/*$py.class
+clipboardjacker/*.so
+clipboardjacker/.Python
+clipboardjacker/build/
+clipboardjacker/develop-eggs/
 dist/
 downloads/
 eggs/

