@@ -2,7 +2,7 @@
 
 import argparse
 import logging
-from .clipreplacer import ClipReplacer
+from .clipboardjacker import ClipboardJacker
 
 def main():
     parser = argparse.ArgumentParser(description="Monitor and replace clipboard text based on regex patterns.")
@@ -15,7 +15,7 @@ def main():
     args = parser.parse_args()
 
     if args.version:
-        print(f"ClipReplacer version {ClipReplacer.get_version()}")
+        print(f"ClipboardJacker version {ClipboardJacker.get_version()}")
         return 0
 
     # Set logging level
@@ -25,11 +25,11 @@ def main():
         logging.getLogger().setLevel(args.log_level)
 
     try:
-        replacer = ClipReplacer(args.config, args.rate_limit)
+        jacker = ClipboardJacker(args.config, args.rate_limit)
         if not args.silent:
-            logging.info(f"ClipReplacer v{ClipReplacer.get_version()} is now monitoring your clipboard...")
+            logging.info(f"ClipboardJacker v{ClipboardJacker.get_version()} is now monitoring your clipboard...")
             logging.info("Press Ctrl+C to stop")
-        replacer.monitor_clipboard()
+        jacker.monitor_clipboard()
     except Exception as e:
         logging.error(f"Fatal error: {str(e)}")
         return 1

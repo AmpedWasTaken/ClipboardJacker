@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
-from clipreplacer.version import __version__
+from clipboardjacker.version import __version__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="clipreplacer",
+    name="clipboardjacker",
     version=__version__,
     author="Your Name",
     author_email="your.email@example.com",
     description="A clipboard text replacement tool using regex patterns",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/clipreplacer",
+    url="https://github.com/yourusername/clipboardjacker",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -25,7 +25,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "clipreplacer=clipreplacer.main:main",
+            "clipboardjacker=clipboardjacker.main:main",
         ],
     },
 ) 

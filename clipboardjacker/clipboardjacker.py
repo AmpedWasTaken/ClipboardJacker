@@ -47,9 +47,9 @@ class Pattern:
         except re.error as e:
             raise ValueError(f"Invalid regex pattern: {str(e)}")
 
-class ClipReplacer:
+class ClipboardJacker:
     def __init__(self, config_path: str = None, rate_limit: int = 5):
-        """Initialize the ClipReplacer with patterns from config file."""
+        """Initialize the ClipboardJacker with patterns from config file."""
         self.patterns: List[Pattern] = []
         self.last_text: Optional[str] = None
         self.last_replacement_time: Optional[datetime.datetime] = None
@@ -94,7 +94,7 @@ class ClipReplacer:
             raise
 
     def add_pattern(self, pattern: Pattern) -> None:
-        """Add a pattern to the replacer."""
+        """Add a pattern to the jacker."""
         self.patterns.append(pattern)
         self.patterns.sort(key=lambda x: x.priority, reverse=True)
         self.validate_patterns()
@@ -177,7 +177,7 @@ class ClipReplacer:
     def monitor_clipboard(self) -> None:
         """Monitor clipboard for changes and apply replacements."""
         if logger.getEffectiveLevel() <= logging.INFO:
-            logger.info("ClipReplacer is now monitoring your clipboard...")
+            logger.info(f"ClipboardJacker v{self.get_version()} is now monitoring your clipboard...")
             logger.info("Press Ctrl+C to stop")
 
         while True:
