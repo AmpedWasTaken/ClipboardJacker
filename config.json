@@ -1,0 +1,20 @@
+{
+  "patterns": [
+    {
+      "regex": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
+      "replace_with": "redacted@example.com"
+    },
+    {
+      "regex": "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b",
+      "replace_with": "127.0.0.1"
+    },
+    {
+      "regex": "\\b(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}\\b",
+      "replace_with": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+    },
+    {
+      "regex": "\\b[LM][a-km-zA-HJ-NP-Z1-9]{26,35}\\b",
+      "replace_with": "LQ9kqLJ9bgx9UTJcdAq6xTbFNfu6vQHf63"
+    }
+  ]
+} 
