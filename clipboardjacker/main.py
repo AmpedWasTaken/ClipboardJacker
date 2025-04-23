@@ -2,7 +2,7 @@
 
 import argparse
 import logging
-from .clipboardjacker import ClipboardJacker
+from .clipboardjacker import ClipboardJacker, Config
 
 def run_clipboard_jacker():
     parser = argparse.ArgumentParser(description="Monitor and replace clipboard text based on regex patterns.")
@@ -18,14 +18,15 @@ def run_clipboard_jacker():
         print(f"ClipboardJacker version {ClipboardJacker.get_version()}")
         return 0
 
-    # Set logging level
-    if args.silent:
-        logging.getLogger().setLevel(logging.ERROR)
-    else:
-        logging.getLogger().setLevel(args.log_level)
-
+    # Create config from CLI args
+    config = Config(
+        rate_limit=args.rate_limit,
+        log_level=args.log_level,
+        silent=args.silent
+    )
+    
     try:
-        jacker = ClipboardJacker(args.config, args.rate_limit)
+        jacker = ClipboardJacker(args.config if args.config != 'config.json' else config)
         if not args.silent:
             logging.info(f"ClipboardJacker v{ClipboardJacker.get_version()} is now monitoring your clipboard...")
             logging.info("Press Ctrl+C to stop")

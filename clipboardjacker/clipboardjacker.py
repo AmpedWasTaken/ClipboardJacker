@@ -5,14 +5,14 @@ import re
 import time
 import logging
 import datetime
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional, Tuple, Union
 from dataclasses import dataclass, field
 import pyperclip
 from collections import defaultdict
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.ERROR,  # Default to ERROR level
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
@@ -47,18 +47,55 @@ class Pattern:
         except re.error as e:
             raise ValueError(f"Invalid regex pattern: {str(e)}")
 
+@dataclass
+class Config:
+    patterns: List[Dict] = field(default_factory=list)
+    rate_limit: int = 5
+    log_level: str = 'INFO'
+    silent: bool = False
+
+    @classmethod
+    def from_file(cls, config_path: str) -> 'Config':
+        try:
+            with open(config_path, 'r') as f:
+                config_data = json.load(f)
+            return cls(
+                patterns=config_data.get('patterns', []),
+                rate_limit=config_data.get('rate_limit', 5),
+                log_level=config_data.get('log_level', 'INFO'),
+                silent=config_data.get('silent', False)
+            )
+        except FileNotFoundError:
+            raise ValueError(f"Config file not found: {config_path}")
+        except json.JSONDecodeError:
+            raise ValueError(f"Invalid JSON in config file: {config_path}")
+
 class ClipboardJacker:
-    def __init__(self, config_path: str = None, rate_limit: int = 5):
-        """Initialize the ClipboardJacker with patterns from config file."""
+    def __init__(self, config: Union[str, Config, Dict] = None):
         self.patterns: List[Pattern] = []
+        self.last_replacement: Optional[datetime.datetime] = None
         self.last_text: Optional[str] = None
-        self.last_replacement_time: Optional[datetime.datetime] = None
-        self.rate_limit = rate_limit  # Minimum seconds between replacements
         self.clipboard_history: List[Tuple[str, datetime.datetime]] = []
         self.max_history_size = 10
+        self.rate_limit: int = 5
+        self.silent: bool = False
         
-        if config_path:
-            self.load_config(config_path)
+        if config is None:
+            config = Config()
+        elif isinstance(config, str):
+            config = Config.from_file(config)
+        elif isinstance(config, dict):
+            config = Config(**config)
+            
+        self.rate_limit = config.rate_limit
+        self.silent = config.silent
+        
+        if not self.silent:
+            logging.getLogger().setLevel(config.log_level)
+        
+        for pattern_dict in config.patterns:
+            self.add_pattern(Pattern.from_dict(pattern_dict))
+        self.validate_patterns()
 
     @staticmethod
     def get_version() -> str:
@@ -112,10 +149,10 @@ class ClipboardJacker:
 
     def can_replace(self) -> bool:
         """Check if we can perform a replacement based on rate limiting."""
-        if self.last_replacement_time is None:
+        if self.last_replacement is None:
             return True
             
-        time_since_last = (datetime.datetime.now() - self.last_replacement_time).total_seconds()
+        time_since_last = (datetime.datetime.now() - self.last_replacement).total_seconds()
         return time_since_last >= self.rate_limit
 
     def backup_clipboard(self, text: str) -> None:
@@ -156,7 +193,7 @@ class ClipboardJacker:
                 
                 # Backup original content
                 self.backup_clipboard(original_text)
-                self.last_replacement_time = datetime.datetime.now()
+                self.last_replacement = datetime.datetime.now()
                 break  # Stop after first match (highest priority)
 
         return text
@@ -176,9 +213,12 @@ class ClipboardJacker:
 
     def monitor_clipboard(self) -> None:
         """Monitor clipboard for changes and apply replacements."""
-        if logger.getEffectiveLevel() <= logging.INFO:
+        if not self.silent:
+            logger.setLevel(logging.INFO)
             logger.info(f"ClipboardJacker v{self.get_version()} is now monitoring your clipboard...")
             logger.info("Press Ctrl+C to stop")
+        else:
+            logger.setLevel(logging.ERROR)
 
         while True:
             try:
