@@ -4,7 +4,8 @@ A powerful Python tool that automatically replaces text in your clipboard based 
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Downloads](https://img.shields.io/pypi/dm/clipboardjacker)](https://pypi.org/project/clipboardjacker/)
+[![PyPI Version](https://img.shields.io/pypi/v/clipboardjacker)](https://pypi.org/project/clipboardjacker/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/clipboardjacker)](https://pypi.org/project/clipboardjacker/)
 
 ## 🚀 Features
 
@@ -36,14 +37,25 @@ A powerful Python tool that automatically replaces text in your clipboard based 
 
 ## 📦 Installation
 
+### Quick Install (Recommended)
 ```bash
-# Install from PyPI
 pip install clipboardjacker
+```
 
-# Or clone and install from source
-git clone https://github.com/yourusername/ClipboardJacker.git
+### From Source
+```bash
+# Clone the repository
+git clone https://github.com/ampedwastaken/ClipboardJacker.git
 cd ClipboardJacker
+
+# Install in development mode
 pip install -e .
+```
+
+### Verify Installation
+```bash
+# Check if installed correctly
+clipboardjacker --version
 ```
 
 ## 🛠️ Usage

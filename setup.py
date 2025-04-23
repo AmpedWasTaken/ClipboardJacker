@@ -1,24 +1,28 @@
 from setuptools import setup, find_packages
-from clipboardjacker.version import __version__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="clipboardjacker",
-    version=__version__,
+    version="0.1.3",
     author="AmpedWastaken",
-    description="A clipboard text replacement tool using regex patterns",
+    author_email="ampedwastaken@gmail.com",
+    description="A powerful Python tool for clipboard text replacement and monitoring",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ampedwastaken/clipboardjacker",
+    url="https://github.com/ampedwastaken/ClipboardJacker",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Topic :: Security",
+        "Topic :: Utilities",
     ],
-    license="MIT",
-    python_requires=">=3.6",
+    python_requires=">=3.8",
     install_requires=[
         "pyperclip>=1.8.2",
     ],
