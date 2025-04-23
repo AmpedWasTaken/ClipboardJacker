@@ -11,7 +11,12 @@ def main():
     parser.add_argument('--log-level', default='INFO', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
                       help='Set the logging level (default: INFO)')
     parser.add_argument('--silent', action='store_true', help='Run in silent mode (no output except errors)')
+    parser.add_argument('--version', action='store_true', help='Show version and exit')
     args = parser.parse_args()
+
+    if args.version:
+        print(f"ClipReplacer version {ClipReplacer.get_version()}")
+        return 0
 
     # Set logging level
     if args.silent:
@@ -22,7 +27,7 @@ def main():
     try:
         replacer = ClipReplacer(args.config, args.rate_limit)
         if not args.silent:
-            logging.info("ClipReplacer is now monitoring your clipboard...")
+            logging.info(f"ClipReplacer v{ClipReplacer.get_version()} is now monitoring your clipboard...")
             logging.info("Press Ctrl+C to stop")
         replacer.monitor_clipboard()
     except Exception as e:

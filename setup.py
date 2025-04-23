@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
+from clipreplacer.version import __version__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
     name="clipreplacer",
-    version="0.1.0",
+    version=__version__,
     author="Your Name",
     author_email="your.email@example.com",
     description="A clipboard text replacement tool using regex patterns",

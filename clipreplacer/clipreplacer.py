@@ -60,6 +60,12 @@ class ClipReplacer:
         if config_path:
             self.load_config(config_path)
 
+    @staticmethod
+    def get_version() -> str:
+        """Get the current version of the package."""
+        from .version import __version__
+        return __version__
+
     def load_config(self, config_path: str) -> None:
         """Load patterns from the config file."""
         try:
